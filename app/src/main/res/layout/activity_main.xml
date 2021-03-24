@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="カテゴリー"
         android:id="@+id/Search_Category"/>
@@ -19,7 +19,9 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="検索"
+        android:id="@+id/Search_Category_button"
         android:layout_toEndOf="@+id/Search_Category"/>
+
 
     <ListView
         android:layout_width="match_parent"

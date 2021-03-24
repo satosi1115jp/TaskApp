@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         mRealm.addChangeListener(mRealmListener)
         //ListViewの設定
         mTaskAdapter = TaskAdapter(this)
-        Search_Category.setOnClickListener { view ->
+        Search_Category_button.setOnClickListener { view ->
             if (Search_Category == null) {
                 reloadListView()
             } else {
@@ -69,12 +69,23 @@ class MainActivity : AppCompatActivity() {
                 }*/
         }
         //listViewをタップした時の処理
-        listView1.setOnItemClickListener { parent, view, position, id ->
+        listView1.setOnItemClickListener { parent, _, position, _ ->
+            Log.d("Debug","通過100")
             //入力画面に移す
             val task = parent.adapter.getItem(position) as Task
             val intent = Intent(this, InputActivity::class.java)
             intent.putExtra("EXTRA_TASK", task.id)
+            startActivity(intent)
+            val aaaa=intent.putExtra("EXTRA_TASK", task.id)
+            Log.d("Debug","$aaaa")
         }
+        /*Debug_button.setOnClickListener(){
+            var ID=intent.putExtra("EXTRA_TASK", task.id)
+
+            for(i in EXTRA_TASK.indices) {
+                Log.d("Debug", "list[$i]=${[$i]}")
+            }
+        }*/
         //ListViewを長押しした時の動作
         listView1.setOnItemLongClickListener { parent, view, position, id ->
             //タスクの削除
@@ -149,5 +160,6 @@ class MainActivity : AppCompatActivity() {
         mRealm.copyToRealmOrUpdate(task)
         mRealm.commitTransaction()
     }*/
+
 
 }

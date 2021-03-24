@@ -14,6 +14,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import androidx.core.content.getSystemService
+import android.util.Log
 
 class InputActivity : AppCompatActivity() {
     private var mYear = 0
@@ -74,12 +75,15 @@ class InputActivity : AppCompatActivity() {
 
         //EXTRA_TASKからTaskのIDを取得し、IDからTaskのインスタンスを取得
         val intent = intent
-        val TaskID = intent.getIntExtra(EXTRA_TASK, -1)
+        val TaskID = intent.getIntExtra(EXTRA_TASK, -10)
         val realm = Realm.getDefaultInstance()
         mTask = realm.where(Task::class.java).equalTo("id", TaskID).findFirst()
+        Log.d("Debug","TaskID="+"$TaskID")
+        Log.d("Debug","エクストラタスク＝"+"$EXTRA_TASK")
         realm.close()
 
         if (mTask == null) {
+            Log.d("Debug","mTask2="+"$mTask")
             //新規作成の場合
             val calendar = Calendar.getInstance()
             mYear = calendar.get(Calendar.YEAR)
@@ -88,6 +92,7 @@ class InputActivity : AppCompatActivity() {
             mHour = calendar.get(Calendar.HOUR_OF_DAY)
             mMinute = calendar.get(Calendar.MINUTE)
         } else {
+            Log.d("Debug","mTask=Not null")
             //更新の場合
             title_edit_text.setText(mTask!!.title)
             content_edit_text.setText(mTask!!.contents)
@@ -115,13 +120,16 @@ class InputActivity : AppCompatActivity() {
         realm.beginTransaction()
 
         if (mTask == null) {
+            Log.d("Debug","通過4")
             //新規作成の場合
             mTask = Task()
             val taskRealmResults = realm.where(Task::class.java).findAll()
             val identifier: Int =
                 if (taskRealmResults.max("id") != null) {
+                    Log.d("Debug","通過5")
                     taskRealmResults.max("id")!!.toInt() + 1
                 } else {
+                    Log.d("Debug","通過6")
                     0
                 }
             mTask!!.id = identifier
