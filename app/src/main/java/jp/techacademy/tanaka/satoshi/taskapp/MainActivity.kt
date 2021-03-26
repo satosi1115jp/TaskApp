@@ -74,10 +74,10 @@ class MainActivity : AppCompatActivity() {
             //入力画面に移す
             val task = parent.adapter.getItem(position) as Task
             val intent = Intent(this, InputActivity::class.java)
-            intent.putExtra("EXTRA_TASK", task.id)
+            intent.putExtra(EXTRA_TASK, task.id)
             startActivity(intent)
-            val aaaa=intent.putExtra("EXTRA_TASK", task.id)
-            Log.d("Debug","$aaaa")
+            val aaaa=intent.putExtra(EXTRA_TASK, task.id)
+            Log.d("Debug","I2D="+"$aaaa")
         }
         /*Debug_button.setOnClickListener(){
             var ID=intent.putExtra("EXTRA_TASK", task.id)

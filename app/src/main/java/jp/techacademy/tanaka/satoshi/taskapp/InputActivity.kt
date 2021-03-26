@@ -75,7 +75,7 @@ class InputActivity : AppCompatActivity() {
 
         //EXTRA_TASKからTaskのIDを取得し、IDからTaskのインスタンスを取得
         val intent = intent
-        val TaskID = intent.getIntExtra(EXTRA_TASK, -10)
+        val TaskID = intent.getIntExtra(EXTRA_TASK, -1)
         val realm = Realm.getDefaultInstance()
         mTask = realm.where(Task::class.java).equalTo("id", TaskID).findFirst()
         Log.d("Debug","TaskID="+"$TaskID")
